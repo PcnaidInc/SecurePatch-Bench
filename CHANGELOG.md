@@ -2,7 +2,7 @@
 
 All notable changes are documented here.
 
-## [0.1.0] - 2026-09-03
+## [0.1.0] - 2026-09-04
 
 ### Added
 
@@ -13,7 +13,7 @@ All notable changes are documented here.
 - CLI commands for catalog listing, manifest validation, built-in runs, custom candidates, pilot generation, and reports.
 - JSON and Markdown pilot results.
 - Benchmark card, threat model, scoring specification, dataset schema, and responsible-use documentation.
-- Initial technical report and publication metadata.
+- Published technical report, fixed-layout PDF, publication page, and citation metadata.
 - CI checks for logical pilot-snapshot drift while excluding volatile timing and environment fields.
 
 ### Validation
