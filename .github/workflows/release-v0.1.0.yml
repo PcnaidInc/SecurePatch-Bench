@@ -1,0 +1,73 @@
+name: Publish v0.1.0 release
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out the CI-tested commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Re-run benchmark validation
+        run: |
+          npm ci
+          npm run ci
+
+      - name: Build the technical-report PDF from the canonical Markdown source
+        run: |
+          docker run --rm \
+            -v "$PWD:/data" \
+            -w /data \
+            pandoc/latex:3.6 \
+            paper/SecurePatch_Bench_v0.1_Technical_Report.md \
+            --from=gfm+yaml_metadata_block \
+            --resource-path=paper \
+            --pdf-engine=xelatex \
+            --toc \
+            -V papersize=letter \
+            -V geometry:margin=0.82in \
+            -V fontsize=10pt \
+            -V colorlinks=true \
+            -V linkcolor=blue \
+            -V urlcolor=blue \
+            -o paper/SecurePatch_Bench_v0.1_Technical_Report.pdf
+          test -s paper/SecurePatch_Bench_v0.1_Technical_Report.pdf
+          file paper/SecurePatch_Bench_v0.1_Technical_Report.pdf | grep -q PDF
+
+      - name: Create immutable v0.1.0 tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v0.1.0 >/dev/null 2>&1; then
+            echo "Release v0.1.0 already exists; leaving the immutable release unchanged."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if ! git rev-parse "refs/tags/v0.1.0" >/dev/null 2>&1; then
+            git tag -a v0.1.0 -m "SecurePatch Bench v0.1.0"
+            git push origin v0.1.0
+          fi
+
+          gh release create v0.1.0 \
+            paper/SecurePatch_Bench_v0.1_Technical_Report.pdf \
+            --title "SecurePatch Bench v0.1.0" \
+            --notes-file RELEASE_NOTES_v0.1.0.md \
+            --verify-tag
