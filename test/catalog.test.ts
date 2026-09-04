@@ -1,0 +1,2 @@
+import test from 'node:test'; import assert from 'node:assert/strict'; import { loadCatalog } from '../src/core/catalog.js';
+void test('catalog loads nine unique scenarios across three categories', async()=>{const c=await loadCatalog();assert.equal(c.length,9);assert.equal(new Set(c.map((s)=>s.id)).size,9);assert.deepEqual([...new Set(c.map((s)=>s.category))].sort(),['authorization','tenant-isolation','webhooks']);});

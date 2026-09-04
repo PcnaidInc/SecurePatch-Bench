@@ -1,0 +1,38 @@
+{
+  "name": "@pcnaid/securepatch-bench",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A defensive benchmark for complete remediation of authorization, tenant-isolation, and webhook-security defects in TypeScript SaaS systems.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Abdul Badran <badran.abdul@pcnaid.com> (https://pcnaid.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PcnaidInc/SecurePatch-Bench.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PcnaidInc/SecurePatch-Bench/issues"
+  },
+  "homepage": "https://github.com/PcnaidInc/SecurePatch-Bench#readme",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "list": "npm run build && node dist/src/cli.js list",
+    "validate": "npm run build && node dist/src/cli.js validate",
+    "pilot": "npm run build && node dist/src/cli.js pilot --write docs/pilot-results.json",
+    "benchmark": "npm run build && node dist/src/cli.js pilot",
+    "report": "npm run build && node dist/src/cli.js report --input docs/pilot-results.json --output docs/PILOT_RESULTS.md",
+    "check:snapshot": "npm run build && node scripts/check-pilot-snapshot.mjs",
+    "check:report": "npm run build && node scripts/check-report.mjs",
+    "ci": "npm run typecheck && npm test && npm run validate && npm run check:snapshot && npm run check:report"
+  },
+  "devDependencies": {
+    "@types/node": "24.0.4",
+    "typescript": "5.8.3"
+  }
+}
