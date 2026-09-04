@@ -16,6 +16,18 @@ The repository is intentionally synthetic. It does not scan live targets, contai
 
 > **Current release status:** v0.1 validates the benchmark oracles against intentionally vulnerable implementations, deliberately incomplete "naive" repairs, and complete reference repairs. It does **not** claim to evaluate any language model yet.
 
+## Published technical report
+
+The `SecurePatch-Bench-v0.1-Research-Paper` download package was a working publication bundle, **not a separate repository or application**. Its canonical public artifacts are now:
+
+- **Publication page:** <https://newsroom.pcnaid.com/research/securepatch-bench-v0-1/>
+- **Technical-report PDF:** <https://github.com/PcnaidInc/SecurePatch-Bench/releases/download/v0.1.0/SecurePatch_Bench_v0.1_Technical_Report.pdf>
+- **Tagged software release:** <https://github.com/PcnaidInc/SecurePatch-Bench/releases/tag/v0.1.0>
+- **Canonical manuscript source:** [`paper/SecurePatch_Bench_v0.1_Technical_Report.md`](paper/SecurePatch_Bench_v0.1_Technical_Report.md)
+- **Citation metadata:** [`CITATION.cff`](CITATION.cff)
+
+Use the newsroom page as the public landing page, the release PDF when a fixed document is required, and the tagged release when citing the software snapshot. The report is a **technical report / preprint — not peer reviewed**. Version 0.1 reports benchmark-oracle validation, not language-model performance.
+
 ## Why this benchmark exists
 
 A patch can compile, pass ordinary unit tests, and still leave the actual security invariant broken. SecurePatch Bench separates two requirements:
@@ -143,7 +155,7 @@ Contributions are welcome when they preserve reproducibility, legal authorizatio
 
 ## Citation
 
-Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Until a DOI is assigned, cite the repository release and technical report version.
+Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Until a DOI is assigned, cite the public `v0.1.0` software release and the Pcnaid technical-report publication page.
 
 ## Licensing
 
