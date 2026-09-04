@@ -3,10 +3,10 @@ message: "If you use SecurePatch Bench, cite the software release and companion 
 title: "SecurePatch Bench"
 type: software
 version: 0.1.0
-date-released: 2026-09-03
+date-released: 2026-09-04
 license: Apache-2.0
 repository-code: "https://github.com/PcnaidInc/SecurePatch-Bench"
-url: "https://github.com/PcnaidInc/SecurePatch-Bench"
+url: "https://newsroom.pcnaid.com/research/securepatch-bench-v0-1/"
 authors:
   - family-names: Badran
     given-names: Abdul
@@ -17,6 +17,7 @@ preferred-citation:
   title: "SecurePatch Bench v0.1: Paired Functional and Security Oracles for Complete SaaS Vulnerability Remediation"
   year: 2026
   institution: Pcnaid Inc.
+  url: "https://newsroom.pcnaid.com/research/securepatch-bench-v0-1/"
   authors:
     - family-names: Badran
       given-names: Abdul
