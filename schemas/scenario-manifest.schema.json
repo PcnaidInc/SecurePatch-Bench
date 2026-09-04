@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pcnaid.com/schemas/securepatch-bench/scenario-manifest-1.0.json",
+  "title": "SecurePatch Bench Scenario Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "id", "title", "category", "version", "language", "runtime",
+    "cwes", "owaspMappings", "summary", "securityInvariant", "visibleBehavior",
+    "securityOracle", "variants", "safeUse", "license"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "id": {"type": "string", "pattern": "^(authorization|tenant-isolation|webhooks)/[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "title": {"type": "string", "minLength": 3},
+    "category": {"enum": ["authorization", "tenant-isolation", "webhooks"]},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "language": {"const": "TypeScript"},
+    "runtime": {"const": "Node.js"},
+    "cwes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^CWE-\\d+$"}},
+    "owaspMappings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+    "summary": {"type": "string", "minLength": 20},
+    "securityInvariant": {"type": "string", "minLength": 20},
+    "visibleBehavior": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 5}},
+    "securityOracle": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 5}},
+    "variants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vulnerable", "naive", "reference"],
+      "properties": {
+        "vulnerable": {"type": "string", "minLength": 5},
+        "naive": {"type": "string", "minLength": 5},
+        "reference": {"type": "string", "minLength": 5}
+      }
+    },
+    "safeUse": {"type": "string", "minLength": 20},
+    "license": {"const": "Apache-2.0"}
+  }
+}

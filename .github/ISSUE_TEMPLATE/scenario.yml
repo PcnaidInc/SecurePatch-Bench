@@ -1,0 +1,48 @@
+name: Scenario proposal
+about: Propose a new synthetic defensive benchmark scenario
+title: "[Scenario] "
+labels: [scenario]
+body:
+  - type: input
+    id: invariant
+    attributes:
+      label: Security invariant
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Legitimate behavior to preserve
+    validations:
+      required: true
+  - type: textarea
+    id: naive
+    attributes:
+      label: Plausible incomplete repair
+    validations:
+      required: true
+  - type: textarea
+    id: oracles
+    attributes:
+      label: Proposed functional and security oracles
+    validations:
+      required: true
+  - type: dropdown
+    id: provenance
+    attributes:
+      label: Provenance
+      options:
+        - Newly written synthetic scenario
+        - Derived from an authorized system with all sensitive details removed
+        - Other - explain below
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I will not submit credentials, personal data, customer code, or live target details.
+          required: true
+        - label: I am authorized to use any non-synthetic source material.
+          required: true

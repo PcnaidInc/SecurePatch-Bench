@@ -1,0 +1,11 @@
+import { fail } from '../../../src/core/errors.js'; import { equal,rejects,runCase } from '../../../src/core/testing.js'; import type {CandidateFactory,ScenarioHarness,VariantName} from '../../../src/core/types.js';
+interface Actor{id:string;tenantId:string;globalAdmin:boolean;adminWorkspaces:string[]} interface Workspace{id:string;tenantId:string;name:string} interface Candidate{rename(actor:Actor,id:string,name:string):Workspace}
+const base:Workspace[]=[{id:'ws-a1',tenantId:'tenant-a',name:'Operations'},{id:'ws-a2',tenantId:'tenant-a',name:'Finance'}];
+const assigned:Actor={id:'u1',tenantId:'tenant-a',globalAdmin:false,adminWorkspaces:['ws-a1']}; const global:Actor={id:'u2',tenantId:'tenant-a',globalAdmin:true,adminWorkspaces:[]}; const member:Actor={id:'u3',tenantId:'tenant-a',globalAdmin:false,adminWorkspaces:[]}; const foreign:Actor={id:'u4',tenantId:'tenant-b',globalAdmin:true,adminWorkspaces:['ws-a1']};
+const make=(mode:'vulnerable'|'naive'|'reference'):Candidate=>{const rows=base.map((x)=>({...x}));return{rename(a,id,name){const w=rows.find((x)=>x.id===id);if(!w)fail('NOT_FOUND','Workspace not found.');const ok=mode==='vulnerable'?a.globalAdmin||a.adminWorkspaces.includes(id):mode==='naive'?a.tenantId===w.tenantId&&(a.globalAdmin||a.adminWorkspaces.length>0):a.tenantId===w.tenantId&&a.adminWorkspaces.includes(id);if(!ok)fail('FORBIDDEN','Workspace administration denied.');w.name=name;return{...w};}}};
+const variants:Record<VariantName,CandidateFactory>={vulnerable:()=>make('vulnerable'),naive:()=>make('naive'),reference:()=>make('reference')}; const s=(f:CandidateFactory)=>f() as Candidate;
+const harness:ScenarioHarness={async runFunctional(f){return[await runCase('assigned admin can rename','functional',()=>equal(s(f).rename(assigned,'ws-a1','Dispatch').name,'Dispatch','rename'))];},async runSecurity(f){return[
+ await runCase('unassigned global admin denied','security',()=>rejects(()=>s(f).rename(global,'ws-a1','X'),'FORBIDDEN','global flag not enough')),
+ await runCase('ordinary member denied','security',()=>rejects(()=>s(f).rename(member,'ws-a1','X'),'FORBIDDEN','member denied')),
+ await runCase('cross-tenant admin denied','security',()=>rejects(()=>s(f).rename(foreign,'ws-a1','X'),'FORBIDDEN','foreign denied'))
+];}}; export{harness,variants};

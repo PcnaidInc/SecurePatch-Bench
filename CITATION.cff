@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use SecurePatch Bench, cite the software release and companion technical report."
+title: "SecurePatch Bench"
+type: software
+version: 0.1.0
+date-released: 2026-09-03
+license: Apache-2.0
+repository-code: "https://github.com/PcnaidInc/SecurePatch-Bench"
+url: "https://github.com/PcnaidInc/SecurePatch-Bench"
+authors:
+  - family-names: Badran
+    given-names: Abdul
+    affiliation: Pcnaid Inc.
+    email: badran.abdul@pcnaid.com
+preferred-citation:
+  type: report
+  title: "SecurePatch Bench v0.1: Paired Functional and Security Oracles for Complete SaaS Vulnerability Remediation"
+  year: 2026
+  institution: Pcnaid Inc.
+  authors:
+    - family-names: Badran
+      given-names: Abdul
+      affiliation: Pcnaid Inc.
