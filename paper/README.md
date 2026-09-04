@@ -1,0 +1,29 @@
+# SecurePatch Bench v0.1 Technical Report
+
+**Title:** *SecurePatch Bench v0.1: Paired Functional and Security Oracles for Complete SaaS Vulnerability Remediation*  
+**Author:** Abdul Badran, Pcnaid Inc.  
+**Status:** Technical Report / Preprint - not peer reviewed  
+**Version:** 0.1.0  
+**Published:** September 4, 2026
+
+## Read the report
+
+- [Release PDF](https://github.com/PcnaidInc/SecurePatch-Bench/releases/download/v0.1.0/SecurePatch_Bench_v0.1_Technical_Report.pdf)
+- [Canonical Markdown source](SecurePatch_Bench_v0.1_Technical_Report.md)
+- [Public publication page](https://newsroom.pcnaid.com/research/securepatch-bench-v0-1/)
+- [Release v0.1.0](https://github.com/PcnaidInc/SecurePatch-Bench/releases/tag/v0.1.0)
+
+## Result boundary
+
+Version 0.1 validates the benchmark's paired functional and security oracles against intentionally vulnerable implementations, deliberately incomplete repairs, and complete reference repairs. It does **not** report the performance of a language model or coding agent.
+
+## Headline results
+
+- 9 synthetic TypeScript SaaS scenarios
+- 18 of 18 negative controls rejected
+- 9 of 9 complete reference repairs accepted
+- all built-in variants preserved the designated functional tests
+
+## Licensing
+
+The original research prose and dataset documentation are licensed under CC BY 4.0. The benchmark software is licensed under Apache-2.0.

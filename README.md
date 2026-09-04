@@ -16,6 +16,15 @@ The repository is intentionally synthetic. It does not scan live targets, contai
 
 > **Current release status:** v0.1 validates the benchmark oracles against intentionally vulnerable implementations, deliberately incomplete "naive" repairs, and complete reference repairs. It does **not** claim to evaluate any language model yet.
 
+## Published technical report
+
+- **Publication page:** <https://newsroom.pcnaid.com/research/securepatch-bench-v0-1/>
+- **PDF:** <https://github.com/PcnaidInc/SecurePatch-Bench/releases/download/v0.1.0/SecurePatch_Bench_v0.1_Technical_Report.pdf>
+- **Repository release:** <https://github.com/PcnaidInc/SecurePatch-Bench/releases/tag/v0.1.0>
+- **Markdown source:** [`paper/SecurePatch_Bench_v0.1_Technical_Report.md`](paper/SecurePatch_Bench_v0.1_Technical_Report.md)
+
+The report is a **technical report / preprint - not peer reviewed**. Version 0.1 reports benchmark-oracle validation, not language-model performance.
+
 ## Why this benchmark exists
 
 A patch can compile, pass ordinary unit tests, and still leave the actual security invariant broken. SecurePatch Bench separates two requirements:
@@ -143,7 +152,7 @@ Contributions are welcome when they preserve reproducibility, legal authorizatio
 
 ## Citation
 
-Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Until a DOI is assigned, cite the repository release and technical report version.
+Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Until a DOI is assigned, cite the public `v0.1.0` repository release and the Pcnaid technical-report publication page.
 
 ## Licensing
 
